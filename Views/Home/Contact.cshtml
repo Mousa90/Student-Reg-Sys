@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.title = "Contact";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb notop">
+                    <li><a href="@Url.Action("Index","Home")">Home</a><span class="divider">/</span></li>
+                    <li class="active">Contact</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <aside>
+                    <div class="widget">
+                        <h4>Get in touch with us</h4>
+                        <ul>
+                            <li>
+                                <label><strong>Phone : </strong></label>
+                                <p>
+                                    +962 79 9818447
+                                </p>
+                            </li>
+                            <li>
+                                <label><strong>Email : </strong></label>
+                                <p>
+                                    mousa_341@hotmail.com
+                                </p>
+                            </li>
+                            <li>
+                                <label><strong>Adress : </strong></label>
+                                <p>
+                                    Ibn Abi Bakrah Street, Shafabadran, Amman, Jordan
+
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <h4>Social network</h4>
+                        <ul class="social-links">
+                            <li><a href="#" title="Twitter"><i class="icon-rounded icon-32 icon-twitter"></i></a></li>
+                            <li><a href="#" title="Facebook"><i class="icon-rounded icon-32 icon-facebook"></i></a></li>
+                            <li><a href="#" title="Google plus"><i class="icon-rounded icon-32 icon-google-plus"></i></a></li>
+                            <li><a href="#" title="Linkedin"><i class="icon-rounded icon-32 icon-linkedin"></i></a></li>
+                            <li><a href="#" title="Pinterest"><i class="icon-rounded icon-32 icon-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            <div class="span8">
+                <!-- Map -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13529.383238492284!2d35.9283183!3d32.03283!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b61cf7bde2c69%3A0x302167aaa889cd05!2sMasjid%20Al%20Farooq!5e0!3m2!1sen!2sjo!4v1585095156149!5m2!1sen!2sjo" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <div class="spacer30"></div>
+
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div>
+                <form action="" method="post" role="form" class="contactForm">
+                    <div class="row">
+                        <div class="span4 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+                                   data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+
+                        <div class="span4 form-group">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email"
+                                   data-msg="Please enter a valid email" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="span8 form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4"
+                                   data-msg="Please enter at least 8 chars of subject" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="span8 form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us"
+                                      placeholder="Message"></textarea>
+                            <div class="validation"></div>
+                            <div class="text-center">
+                                <button class="btn btn-primary" type="submit">Send message</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

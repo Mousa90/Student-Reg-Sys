@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.title = "Home";
+}
+
+<!-- intro
+================================================== -->
+<section id="intro">
+    <div class="overlay"></div>
+    <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="intro-words">
+                <div class="intro-welcome">Welcome</div>
+                <div>
+                    <span>to our website</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lds-facebook"><div></div><div></div><div></div></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="~/Content/img/intro-video.mp4" type="video/mp4">
+    </video>
+</section>
+<section id="maincontent">
+
+    @Html.Action("StudentsCards")
+
+</section>
+<script>
+
+    function openProfile1() {
+        document.getElementById("myProfile1").style.display = "block";
+    }
+    function openProfile2() {
+        document.getElementById("myProfile2").style.display = "block";
+    }
+    function openProfile3() {
+        document.getElementById("myProfile3").style.display = "block";
+    }
+    function openProfile4() {
+        document.getElementById("myProfile4").style.display = "block";
+    }
+    function openProfile5() {
+        document.getElementById("myProfile5").style.display = "block";
+    }
+    function openProfile6() {
+        document.getElementById("myProfile6").style.display = "block";
+    }
+    function openProfile7() {
+        document.getElementById("myProfile7").style.display = "block";
+    }
+    function openProfile8() {
+        document.getElementById("myProfile8").style.display = "block";
+    }
+
+    function closeProfile() {
+        document.getElementById("myProfile1").style.display = "none";
+        document.getElementById("myProfile2").style.display = "none";
+        document.getElementById("myProfile3").style.display = "none";
+        document.getElementById("myProfile4").style.display = "none";
+        document.getElementById("myProfile5").style.display = "none";
+        document.getElementById("myProfile6").style.display = "none";
+        document.getElementById("myProfile7").style.display = "none";
+        document.getElementById("myProfile8").style.display = "none";
+    }
+
+    $(document).ready(function () {
+        $(document).on("click", ".pagination-control a[href]", function () {
+            $.ajax({
+                url: $(this).attr("href"),
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#maincontent').html(result);
+                }
+            });
+            return false;
+        });
+    });
+
+     //Search when click on search button 
+    $("#submit").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/Home/StudentsCards?i=1&search=" + $("#StudentName").attr("Value"),
+            cache: false,
+            success: function (result) {
+                $('#maincontent').html(result);
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+</script>

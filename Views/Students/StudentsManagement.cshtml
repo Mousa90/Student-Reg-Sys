@@ -1,0 +1,90 @@
+﻿@model List<StudentRegSys.Models.Student>
+@{
+    ViewBag.Title = "StudentsManagement";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb notop">
+                    <li><a href="@Url.Action("Index","Home")">Home</a><span class="divider">/</span></li>
+                    <li class="active">Students Management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="container">
+                    <h2 class="title-container">Students Management</h2>
+                    <div class="btn-container">
+                        @using (@Html.BeginForm("StudentForm", "Students"))
+                        {
+                        <button type="submit" class="btn btn-primary btn-student-text"></button>
+                        }
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <table id="students-table" class="table-fill">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-hover">
+
+                            @foreach (var student in Model)
+                            {
+                            <tr class="dt-icons">
+                                <td class="text-left dt-button-col">
+                                    @student.Name
+                                    <div class="dt-icon-delete"><img data-major-id="@student.ID" class="dt-icon-img js-delete" title="Delete" src="~/Content/img/delete-icon.png" /></div>
+                                    <div class="dt-icon-edit"><a href="@Url.Action("Edit","Students", new { id = student.ID} )"><img class="dt-icon-img" title="Edit" src="~/Content/img/edit-icon.png" /></a></div>
+                                </td>
+
+                            </tr>
+
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@Scripts.Render("~/Content/css")
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#students-table").DataTable();
+
+            $("#students-table").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this student?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Students/Delete/" + button.attr("data-major-id"),
+                            type: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+

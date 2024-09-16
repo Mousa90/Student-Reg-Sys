@@ -1,0 +1,178 @@
+﻿@{
+    string HomeActive = ViewBag.title == "Home" ? "active" : string.Empty;
+    string AboutActive = ViewBag.title == "About us" ? "active" : string.Empty;
+    string ContactActive = ViewBag.title == "Contact" ? "active" : string.Empty;
+    string AdminActive =
+        ViewBag.title == "Students Management" ||
+        ViewBag.title == "Majors Management" ||
+        ViewBag.title == "New Student" ||
+        ViewBag.title == "New Major" ||
+        ViewBag.title == "Edit Student" ||
+        ViewBag.title == "Edit Major" ? "active" : string.Empty;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    @if (ViewBag.title == "Home")
+    {
+        <title>Student Registration System</title>
+    }
+    else
+    {
+        <title>@ViewBag.Title - Student Registration System</title>
+    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+    @Styles.Render("~/template/css")
+
+
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="~/Content/ico/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/Content/ico/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Content/ico/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/ico/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Content/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/ico/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/ico/apple-touch-icon-180x180.png" />
+
+</head>
+
+<body>
+    <header>
+        <!-- Navbar
+        ================================================== -->
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- logo -->
+                    <a class="brand logo" href="@Url.Action("Index","Home")"><img class="logo" src="~/Content/img/srs-logo.png" alt=""></a>
+                    <!-- end logo -->
+                    <!-- top menu -->
+                    <div class="navigation">
+                        <nav>
+                            <ul class="nav topnav">
+                                <li class="dropdown @HomeActive">
+                                    <a class="main" href="@Url.Action("Index","Home")">Home</a>
+                                </li>
+                                <li class="dropdown @AboutActive">
+                                    <a class="main" href="@Url.Action("About","Home")">About</a>
+                                </li>
+                                <li class="dropdown @AdminActive">
+                                    <a class="main" href="#">Admin Area</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("StudentsManagement","Students")">Students Management</a>
+                                            <ul class="dropdown-menu sub-menu">
+                                                <li><a href="@Url.Action("StudentForm","Students")">New Student</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("MajorsManagement","Majors")">Majors Management</a>
+                                            <ul class="dropdown-menu sub-menu">
+                                                <li><a href="@Url.Action("MajorForm","Majors")">New Major</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">Errors Test</a>
+                                            <ul class="dropdown-menu sub-menu">
+                                                <li><a href="@Url.Action("Error","Home")">Exception</a></li>
+                                                <li><a href="~/404.html">404</a></li>
+                                                <li><a href="~/500.html">500</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="@ContactActive">
+                                    <a class="main" href="@Url.Action("Contact","Home")">Contact</a>
+                                </li>
+                            </ul>
+                            <select><option selected="selected" value="">Go to...</option><option value="/">Home</option><option value="/Home/About">About</option><option value="#">Admin Area</option><option value="/Students/StudentsManagement">Students Management</option><option value="/Students/StudentForm">New Student</option><option value="/Majors/MajorsManagement">Majors Management</option><option value="/Majors/MajorForm">New Major</option><option value="#">Errors Test</option><option value="/Home/Error">Exception</option><option value="/404.html">404</option><option value="/500.html">500</option><option value="/Home/Contact">Contact</option></select>
+                        </nav>
+                    </div>
+                    <!-- end menu -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    <div class="widget">
+                        <h5>Browse pages</h5>
+                        <ul class="regular">
+                            <li><a href="@Url.Action("Contact", "Home")">Work for us</a></li>
+                            <li><a href="#">Home page</a></li>
+                            <li><a href="#maincontent">Registered students</a></li>
+                            <li><a href="404.html">404 Page not found</a></li>
+                            <li><a href="@Url.Action("About", "Home")">Meet the team</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h5>Admin pages</h5>
+                        <ul class="regular">
+                            <li><a href="@Url.Action("StudentsManagement","Students")">Students Management</a></li>
+                            <li><a href="@Url.Action("StudentForm","Students")">New Student</a></li>
+                            <li><a href="@Url.Action("MajorsManagement","Majors")">Majors Management</a></li>
+                            <li><a href="@Url.Action("MajorForm","Majors")">New Major</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <!-- logo -->
+                        <a class="brand logo" href="@Url.Action("Index","Home")">
+                            <img class="logo" src="~/Content/img/srs-logo.png" alt="">
+                        </a>
+                        <!-- end logo -->
+                        <address>
+                            <strong>Student Registration System, Inc.</strong><br>
+                            Ibn Abi Bakrah Street<br />
+                            Shafabadran, Amman, Jordan<br />
+                            <abbr title="Phone">P:</abbr> (962) 79-9818447
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="verybottom">
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p>
+                            &copy; @DateTime.Now.Year Student Registration System. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="span6">
+                        <div class="credits">
+                            Designed by <a href="@Url.Action("About", "Home")">Mousa Al-Kalouti</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a id="scrollupbutton"></a>
+
+    @Scripts.Render("~/template/js")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb notop">
+                    <li><a href="@Url.Action("Index","Home")">Home</a><span class="divider">/</span></li>
+                    <li class="active">Error</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="notfound">
+    <div class="notfound">
+        <div class="notfound-404">
+            <h1>Oops!</h1>
+            <h2>Sorry, Something went wrong</h2>
+        </div>
+        <a href="@Url.Action("Index","Home")">Go TO Homepage</a>
+    </div>
+</div>

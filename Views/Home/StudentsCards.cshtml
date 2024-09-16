@@ -1,0 +1,194 @@
+﻿@model IPagedList<StudentRegSys.Models.Student>
+@{
+    Layout = null;
+    int SCount = 0;
+    string myProfile = "";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+@Styles.Render("~/template/css")
+
+<div class="container">
+    <div class="row">
+        <!-- Filter -->
+        <div class="search-form">
+            @Html.TextBox("StudentName", null, new { @class = "form-control search-text", @Name = "search", @placeholder = "Enter your search text here ...", @Value = ViewBag.StudentsSearch })
+            <button id="submit" class="btn btn-primary search-btn">Search</button>
+        </div>
+
+        <!-- if there no data -->
+        @if (Model.Count() == 0)
+        {
+            <img class="img-no-search-result" alt="image" src="~/Content/img/no-search-result.png">
+        }
+
+        <!-- Students Cards -->
+
+        @foreach (var student in Model)
+        {
+            SCount++;
+            myProfile = "myProfile" + SCount;
+            @:<div class="col-md-3 cards">
+                @:<div class="contact-box center-version">
+                    @:<div class="p-info">
+
+                        if (@student.Photo == null)
+                        {
+                            if (student.Gender == 0)
+                            {
+                                <img alt="image" class="img-circle" src="~/Content/img/graduate-male.png">
+                            }
+                            else
+                            {
+                                <img alt="image" class="img-circle" src="~/Content/img/graduate-female.png">
+                            }
+                        }
+                        else
+                        {
+                            <img alt="image" class="img-circle" src="@student.Photo">
+                        }
+
+                        @:<h4 class="m-b-xs"><strong>@student.Name</strong></h4>
+
+                        @:<div class="font-bold">@student.Major.Name</div>
+                        @:<address class="m-t-md">
+                            if (!(@student.Address == null))
+                            {
+                                @student.Address<br>
+                            }
+
+                            if (!(@student.Phone == null))
+                            {
+                                <abbr title="Phone" class="font-bold">P:</abbr> @student.Phone
+                            }
+
+                        @: </address>
+                    @:</div>
+                    @:<div class="contact-box-footer">
+
+                        switch (SCount)
+                        {
+                            case 1:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile1()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 2:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile2()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 3:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile3()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 4:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile4()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 5:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile5()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 6:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile6()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 7:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile7()">
+                                    View Profile
+                                </button>
+                                break;
+                            case 8:
+                                <button type="submit" class="btn btn-primary" id="btnViewProfile" onclick="openProfile8()">
+                                    View Profile
+                                </button>
+                                break;
+                        }
+
+                    @:</div>
+
+                @:</div>
+            @:</div>
+            //Students Profiles
+
+            switch (SCount)
+            {
+                case 1:
+                    <div class="form-popup" id="myProfile1">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 2:
+                    <div class="form-popup" id="myProfile2">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 3:
+                    <div class="form-popup" id="myProfile3">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 4:
+                    <div class="form-popup" id="myProfile4">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 5:
+                    <div class="form-popup" id="myProfile5">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 6:
+                    <div class="form-popup" id="myProfile6">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 7:
+                    <div class="form-popup" id="myProfile7">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+                case 8:
+                    <div class="form-popup" id="myProfile8">
+                        @Html.Action("StudentProfile", "Home", new { @student.ID })
+                    </div>
+                    break;
+            }
+
+        }
+
+        <!-- Pagination control search = Request.QueryString["search"]-->
+        <div class="pagination-control">
+            @Html.PagedListPager(Model, i => Url.Action("StudentsCards", "Home", new { i, search = ViewBag.StudentsSearch }))
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    //Search when click on search button 
+    $("#submit").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/Home/StudentsCards?i=1&search=" + $("#StudentName").attr("Value"),
+            cache: false,
+            success: function (result) {
+                $('#maincontent').html(result);
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+</script>
+@Scripts.Render("~/template/js")

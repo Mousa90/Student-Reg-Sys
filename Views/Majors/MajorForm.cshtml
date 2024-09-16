@@ -1,0 +1,55 @@
+﻿@model StudentRegSys.Models.Major
+@{
+    if (Model.IsAdd == true)
+    {
+        ViewBag.Title = "New Major";
+    }
+    else
+    {
+        ViewBag.Title = "Edit Major";
+    }
+
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb notop">
+                    <li><a href="@Url.Action("Index","Home")">Home</a><span class="divider">/</span></li>
+                    <li><a href="@Url.Action("MajorsManagement","Majors")">Majors Management</a><span class="divider">/</span></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>@ViewBag.Title</h2>
+
+                @using (@Html.BeginForm("Save", "Majors"))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name)
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                    @Html.HiddenFor(m => m.ID)
+                    @Html.AntiForgeryToken();
+                    <button type="submit" class="btn btn-primary btn-submit">Save</button>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")                     
+   
+}

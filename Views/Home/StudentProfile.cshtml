@@ -1,0 +1,79 @@
+﻿@model StudentRegSys.Models.Student
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+@Styles.Render("~/template/css")
+
+<!-- Students Profile -->
+
+<div class="profile-box">
+
+    @{
+
+        if (@Model.Photo == null)
+        {
+            if (@Model.Gender == 0)
+            {
+                <img alt="image" class="img-circle" src="~/Content/img/graduate-male.png">
+            }
+            else
+            {
+                <img alt="image" class="img-circle" src="~/Content/img/graduate-female.png">
+            }
+        }
+        else
+        {
+            <img alt="image" class="img-circle" src="@Model.Photo">
+        }
+
+        @:<div class="p-info">
+
+
+
+
+            @:<h2>Student Profile</h2>
+
+
+
+
+            @:<h6 class="m-b-xs"><strong>Name: @Model.Name</strong></h6>
+            @:<h6 class="m-b-xs"><strong>Birthday: @Model.DateofBirth.ToString().Replace("12:00:00 AM", "")</strong></h6>
+            @:<h6 class="m-b-xs"><strong>Gender: @Model.Gender</strong></h6>
+            @:<h6 class="m-b-xs"><strong>Major: @Model.Major.Name</strong></h6>
+
+
+
+
+            if (!(@Model.Address == null))
+            {
+                @:<h6 class="m-b-xs"><strong>Address: @Model.Address</strong></h6>
+            }
+            else
+            {
+                @:<h6 class="m-b-xs"><strong>Address: Not Avalibale</strong></h6>
+            }
+
+            if (!(@Model.Phone == null))
+            {
+                @:<h6 class="m-b-xs"><strong>Phone: @Model.Phone</strong></h6>
+            }
+            else
+            {
+                @:<h6 class="m-b-xs"><strong>Phone: Not Avalibale</strong></h6>
+            }
+
+        @:</div>
+
+
+
+
+        @:<div class="p-button">
+            <button type="button" class="btn btn-primary" onclick="closeProfile()">Close</button>
+        @:</div>
+    }
+</div>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+@Styles.Render("~/template/css")
+

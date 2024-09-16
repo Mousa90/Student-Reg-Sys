@@ -1,0 +1,110 @@
+﻿@model StudentRegSys.ViewModels.StudentViewModel
+@{
+    if (Model.IsAdd == true)
+    {
+        ViewBag.Title = "New Student";
+    }
+    else
+    {
+        ViewBag.Title = "Edit Student";
+    }
+
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="breadcrumb notop">
+                    <li><a href="@Url.Action("Index","Home")">Home</a><span class="divider">/</span></li>
+                    <li><a href="@Url.Action("StudentsManagement","Students")">Students Management</a><span class="divider">/</span></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>@ViewBag.Title</h2>
+
+                @using (@Html.BeginForm("Save", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    // Student Name Textbox
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.Name)
+                        @Html.TextBoxFor(m => m.Student.Name)
+                        @Html.ValidationMessageFor(m => m.Student.Name)
+                    </div>
+
+                    // Date of Birth Textbox
+                    <div class="form-group date-box">
+                        @Html.LabelFor(m => m.Student.DateofBirth)
+                        @Html.TextBoxFor(m => m.Student.DateofBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                        @Html.ValidationMessageFor(m => m.Student.DateofBirth)
+                    </div>
+
+                    // Gender Radio buttons
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.Gender)
+
+                        <label class="rdb-container">
+                            Male
+                            @Html.RadioButtonFor(m => m.Student.Gender, "Male")
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <label class="rdb-container">
+                            Female
+                            @Html.RadioButtonFor(m => m.Student.Gender, "Female")
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    // Majors Drop Down List
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.MajorID)
+                        @Html.DropDownListFor(m => m.Student.MajorID, new SelectList(Model.Majors, "ID", "Name"), "--- Select Major ---")
+                        @Html.ValidationMessageFor(m => m.Student.MajorID)
+                    </div>
+
+                    // Address Textbox
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.Address)
+                        @Html.TextBoxFor(m => m.Student.Address)
+                        @Html.ValidationMessageFor(m => m.Student.Address)
+                    </div>
+
+                    // Phone Textbox
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.Phone)
+                        @Html.TextBoxFor(m => m.Student.Phone, new { @type = "tel" })
+                        @Html.ValidationMessageFor(m => m.Student.Phone)
+                    </div>
+
+                    // Upload Photo
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Student.Photo)
+                        <input input type="file" name="file" class="custom-file-input" id="PhotoFile">
+                    </div>
+
+                    @Html.HiddenFor(m => m.Student.ID)
+                    @Html.AntiForgeryToken();
+                    <button type="submit" class="btn btn-primary btn-submit">Save</button>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
